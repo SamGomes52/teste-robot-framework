@@ -30,3 +30,12 @@ jobs:
       - name: Run Robot Framework Tasks
         run: |
           robot -d ./results -v HEADLESS:true -v BROWSER:chromium tasks
+
+      -name: Upload Tasks Results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: results
+        path: ./results
+        if-no-files-found: ignore
+        retention-days: 2
